@@ -1,49 +1,27 @@
 import { Link } from "react-router-dom"
 
-function Post() {
+function Post({ item }) {
+
+  const date = new Date(item.created_at).toLocaleDateString()
+
   return (
-    // <div className="card w-5/6 bg-base-100 shadow-xl">
-    //   <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-    //   <div className="card-body">
-    //     <h2 className="card-title">Shoes!</h2>
-    //     <p>If a dog chews shoes whose shoes does he choose?</p>
-    //     <div className="card-actions justify-end">
-    //       <button className="btn btn-primary">Buy Now</button>
-    //     </div>
-    //   </div>
-    // </div>
-    // <div className="card rounded bg-neutral">
-    // <div className="flex border-b border-gray-primary h-4 p-4 py-8">
-    // <div className="flex items-center">
-    //     <Link to='/ff' className="flex items-center">
-    //       <img
-    //         className="rounded-full h-8 w-8 flex mr-3"
-    //         src="https://images.unsplash.com/photo-1626847037657-fd3622613ce3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Y2FyJTIwcHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80"
-    //       />
-    //       <p className="font-bold">username</p>
-    //     </Link>
-    //   </div>
-    // </div>
 
-      // <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Ym13JTIwY2FyfGVufDB8fDB8fA%3D%3D&w=1000&q=80" alt="" />
-    // </div>
-
-    <div className="card border-0 rounded bg-neutral">
+    <div className="card border-0 rounded bg-neutral mb-9">
       <div className="flex border-0 border-gray-primary h-4 p-4 py-8">
         <div className="flex items-center">
-          <Link to='/ff' className="flex items-center">
+          <Link to={`/users/${item.user.id}`} className="flex items-center">
             <img
               className="rounded-full h-8 w-8 flex mr-3"
-              src="https://images.unsplash.com/photo-1626847037657-fd3622613ce3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Y2FyJTIwcHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80"
+              src={item.user.avatar}
+              alt='avatar'
             />
-            <p className="font-bold">username</p>
+            <p className="font-bold">{item.user.username}</p>
           </Link>
         </div>
       </div>
-
-      <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Ym13JTIwY2FyfGVufDB8fDB8fA%3D%3D&w=1000&q=80" alt="" />
-
-
+      <Link to={`/p/${item.id}`}>
+        <img src={item.image} alt="" />
+      </Link>
       <div className="flex justify-between p-4">
         <div className="flex">
           <svg
@@ -83,13 +61,13 @@ function Post() {
         </div>
       </div>
       <div className="p-4 py-0">
-        <p className="font-bold">41.6m likes</p>
+        <p className="font-bold">{item.likes_count} likes</p>
       </div>
       
 
       <div className="p-4 pt-2 pb-1">
-        <span className="mr-1 font-bold">username</span>
-        <span className="italic">caption</span>
+        <span className="mr-1 font-bold">{ item.user.username }</span>
+        <span className="italic">{ item.content }</span>
         <br />
       </div>
         
@@ -101,12 +79,12 @@ function Post() {
             View more comments
           </button>
         <p className="text-gray-base uppercase text-xs mt-2">
-          13h. ago
+          {date}
         </p>
       </div>
       
       <div className="mt-5 p-0 h-12">
-        <input type="text" placeholder="Leave comment" class="bg-neutral ml-4  w-full focus:outline-none focus:none active:none max-w-md m-0"/>
+        <input type="text" placeholder="Leave comment" className="bg-neutral ml-4  w-full focus:outline-none focus:none active:none max-w-md m-0"/>
         <button type="button" className="bg-none text-sky-400">Post</button>
       </div>
     </div>
